@@ -1,17 +1,22 @@
 require("dotenv").config();
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const transporter = {
-  sendMail: async ({ from, to, subject, html }) => {
-    return await resend.emails.send({
-      from: from || `Shopora <onboarding@resend.dev>`,
-      to,
-      subject,
-      html,
-    });
+const transporter = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_PASS,
   },
-};
+});
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("❌ Brevo SMTP connection failed:", error.message);
+  } else {
+    console.log("✅ Brevo SMTP connected and ready to send emails");
+  }
+});
 
 module.exports = transporter;

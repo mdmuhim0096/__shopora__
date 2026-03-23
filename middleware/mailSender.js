@@ -397,7 +397,7 @@ async function sendOrderEmail(products, userName, email, orderId) {
     // 4️⃣ Send Customer Email
     // ==============================
     await transporter.sendMail({
-      from: `"Shopora" <${process.env.EMAIL_USER}>`,
+     from: `Shopora <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Your Order Confirmation 🛒",
       html: customerHTML
@@ -407,7 +407,7 @@ async function sendOrderEmail(products, userName, email, orderId) {
     // 5️⃣ Send Admin Email
     // ==============================
     await transporter.sendMail({
-      from: `"Shopora System" <${process.env.EMAIL_USER}>`,
+      from: `Shopora <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       subject: `New Order from ${userName}`,
       html: adminHTML
@@ -422,7 +422,7 @@ async function sendOrderEmail(products, userName, email, orderId) {
 
 async function sendSubscritionEmail(userName, email) {
   await transporter.sendMail({
-    from: `"Shopora" <${process.env.EMAIL_USER}>`,
+    from: `Shopora <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Subscription Activated 🎉",
     html: `
@@ -748,13 +748,13 @@ function sendProductCreateEmail(user) {
   }
 
   async function send(to, html) {
-    await transporter.sendMail({ from: "Shopora <muhinking765@gmail.com>", to, html })
+    await transporter.sendMail({ from: `Shopora <${process.env.EMAIL_USER}>`, to, html })
   }
 }
 
 async function approvedOrder(user) {
   await transporter.sendMail({
-    from: `Shopora <${process.env.EMAIL_USER}>`,
+   from: `Shopora <${process.env.EMAIL_USER}>`,
     to: user.email,
     subject: `✅ Your Order Has Been Approved – Shopora`,
     html: `<!DOCTYPE html>
