@@ -1424,5 +1424,6 @@ async function rejectedOrder(user) {
 </html>`
   });
 };
+
 module.exports = { sendOrderEmail, sendSubscritionEmail, sendProductCreateEmail, approvedOrder, rejectedOrder };
 
