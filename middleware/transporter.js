@@ -3,16 +3,13 @@ require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,        // ← true for port 465
   auth: {
-    // ✅ Fixed: credentials moved to environment variables (never hardcode these!)
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
+  family: 4,           // ← forces IPv4, fixes Railway's IPv6 issue
 });
 
 transporter.verify((error, success) => {
