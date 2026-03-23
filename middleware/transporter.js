@@ -1,15 +1,15 @@
+require("dotenv").config();
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: "smtp.resend.com",
   port: 465,
-  secure: true,        // ← true for port 465
+  secure: true,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: "resend",
+    pass: process.env.RESEND_API_KEY,  // from resend.com free account
   },
-  family: 4,           // ← forces IPv4, fixes Railway's IPv6 issue
 });
 
 transporter.verify((error, success) => {
